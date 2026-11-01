@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.taste-skill/
+.playwright-cli/
+shots/
+server/data/
+server/uploads/
+server/*.log
+*.log
+.env
+CLAUDE-DESIGN-PROMPT.md
+.direction.md
