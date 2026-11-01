@@ -103,3 +103,13 @@ The free plan sleeps after about 15 minutes idle (the first visit then takes ~30
 - **Logo**: traced from the client's own artwork into vector shapes (`client/src/lib/logoShapes.json`: 27 gold rays and the teal lettering). `components/Logo3D.jsx` extrudes them in Three.js: click it to watch the circle of rays complete, turn once and return. Reduced-motion users get the still logo.
 - **Fonts**: Marcellus (headings) and Source Sans 3 (text), the closest open fonts to the logo's lettering. If the client has the exact logo typeface licensed, swap `--font-display` / `--font-text` in `styles.css`.
 - **Photographs**: the client's images are in `client/public/img/photos` and assigned to projects in `client/src/lib/media.js`. The assignment is a placeholder; confirm which photo belongs to which project and change the file names there.
+
+## Put it live on Vercel (alternative to Render)
+
+Vercel cannot store files, so there the forms use the serverless functions in `api/` and email every enquiry and CV to you. `vercel.json` already sets the build.
+
+1. Import the GitHub repository. Leave **Root Directory** as `./` and set **Application Preset** to **Other** (do not use the "Services" preset or import `client` and `server` separately).
+2. Before deploying, open **Environment Variables** and add: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_TO` and optionally `MAIL_FROM`. For Gmail: host `smtp.gmail.com`, port `465`, your address as user, and a Google **App Password** (not your normal password).
+3. Deploy. Without those variables the site works but the forms answer "Online enquiries are not switched on yet".
+
+Differences from the Express server: no rate limiting and no admin listing, and CVs are capped at 4 MB.

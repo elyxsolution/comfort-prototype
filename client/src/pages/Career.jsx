@@ -21,8 +21,8 @@ export default function Career() {
     if (!/^\+?[0-9 ()-]{8,16}$/.test(String(fd.get('phone')).trim())) local.phone = 'Enter a valid phone number';
     if (!/^\S+@\S+\.\S+$/.test(String(fd.get('email')).trim())) local.email = 'Enter a valid email';
     const cv = fd.get('cv');
-    if (!cv || !cv.size) local.cv = 'Attach your CV (PDF or Word, up to 5 MB)';
-    else if (cv.size > 5 * 1024 * 1024) local.cv = 'That file is over 5 MB';
+    if (!cv || !cv.size) local.cv = 'Attach your CV (PDF or Word, up to 4 MB)';
+    else if (cv.size > 4 * 1024 * 1024) local.cv = 'That file is over 4 MB';
     if (Object.keys(local).length) return setErrors(local);
     setErrors({});
     setState({ status: 'sending', message: '' });
@@ -65,7 +65,7 @@ export default function Career() {
               <div data-r data-r-delay="0.12"><Field label="Email" name="email" error={errors.email}>
                 <input id="email" name="email" type="email" autoComplete="email" aria-invalid={!!errors.email} required />
               </Field></div>
-              <div data-r data-r-delay="0.18"><Field label="Your CV" name="cv" error={errors.cv} hint="PDF or Word, up to 5 MB">
+              <div data-r data-r-delay="0.18"><Field label="Your CV" name="cv" error={errors.cv} hint="PDF or Word, up to 4 MB">
                 <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf" onChange={(e) => setFile(e.target.files[0]?.name || '')} aria-invalid={!!errors.cv} />
                 {file && <span className="field__hint">Selected: {file}</span>}
               </Field></div>
